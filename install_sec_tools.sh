@@ -40,5 +40,22 @@ if [ ! -d "$HOME/.gf" ]; then
     git clone https://github.com/1ndianl33t/Gf-Patterns ~/.gf
 fi
 
+# Fix 'gau' conflict with Git Zsh plugin by renaming it
+if command_exists gau; then
+    echo "⚠️ Detected 'gau' conflict, renaming it to 'gau-tool'..."
+    mv $(which gau) $(dirname $(which gau))/gau-tool
+    echo 'alias gau="gau-tool"' >> ~/.zshrc
+    echo 'alias gau="gau-tool"' >> ~/.bashrc
+fi
+
+# Fix 'gf' conflict with Git Zsh plugin
+if alias gf &>/dev/null; then
+    echo "⚠️ Detected 'gf' conflict. Unaliasing it..."
+    unalias gf
+    echo 'unalias gf' >> ~/.zshrc
+    echo 'unalias gf' >> ~/.bashrc
+fi
+
+
 echo "✅ Installation complete!"
 

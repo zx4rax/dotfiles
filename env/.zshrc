@@ -127,8 +127,10 @@ alias psg="ps aux | grep"                          # Search for a process
 alias reload="source ~/.zshrc"                     # Reload zsh configuration
 alias norg="gron --ungron"
 alias ungron="gron --ungron"
+alias tidal-dl="./home/xigma/tidal-dl/tidal/bin/tidal-dl"                #tidal downloader app
 
 
 PROMPT='%(?:%{$fg_bold[white]%}%1{Χ%} :%{$fg_bold[white]%}%1{Χ%} )%{$fg[cyan]%}%c%{$reset_color%} $(git branch 2>/dev/null | grep "*" | sed -e "s/* //g") '
 
 export PATH=$PATH:$HOME/go/bin
+export PATH="$PATH:/opt/nvim/"
