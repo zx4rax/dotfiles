@@ -1,14 +1,31 @@
-#!/bin/bash
+#!/bin/env bash
 dotfilesDir=$(pwd)
+
+sudo apt -y update
+
+
+if ! command -v git &> /dev/null; then
+    sudo apt -y install git
+fi
+
+if [ ! -d $HOME/personal ]; then
+    mkdir $HOME/personal
+fi
+
+git clone https://github.com/zx4rax/dotfiles $HOME/personal/dotfiles
+
+pushd $HOME/personal/dev
+./run
+popd
 
 function linkDotfile {
   dest="${HOME}/${1}"
   dateStr=$(date +%Y-%m-%d-%H%M)
 
   if [ -h ~/${1} ]; then
-    # Existing symlink 
+    # Existing symlink
     echo "Removing existing symlink: ${dest}"
-    rm ${dest} 
+    rm ${dest}
 
   elif [ -f "${dest}" ]; then
     # Existing file

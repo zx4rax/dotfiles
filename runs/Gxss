@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+go install github.com/KathanP19/Gxss@latest
+
+
