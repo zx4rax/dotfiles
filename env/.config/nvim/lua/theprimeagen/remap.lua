@@ -3,7 +3,6 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move block down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move block up" })
-
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join line (safe)" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down & center" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up & center" })
@@ -11,13 +10,6 @@ vim.keymap.set("n", "n", "nzzzv", { desc = "Next search, center" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev search, center" })
 vim.keymap.set("n", "=ap", "ma=ap'a", { desc = "Format paragraph" })
 vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
-
-vim.keymap.set("n", "<leader>vwm", function()
-    require("vim-with-me").StartVimWithMe()
-end, { desc = "Start VimWithMe" })
-vim.keymap.set("n", "<leader>svwm", function()
-    require("vim-with-me").StopVimWithMe()
-end, { desc = "Stop VimWithMe" })
 
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste w/o yank" })
 

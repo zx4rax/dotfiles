@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+pip3 install tidal-dl --upgrade --break-system-packages

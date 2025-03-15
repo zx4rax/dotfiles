@@ -18,6 +18,8 @@ font pango:monospace 15px
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
+exec always nitrogen --restore
+
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -188,7 +190,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
     font pango:DejaVu Sans Mono, FontAwesome 12
-    position bottom
+    position top
     status_command i3status-rs /home/xigma/.config/i3status-rs/config.toml
     colors {
         separator #666666
@@ -205,6 +207,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 
-exec --no-startup-id setxkbmap -layout "us,ir" -option "grp:alt_shift_toggle"
+
+bindsym $mod+Shift+p exec --no-startup-id i3lock -c 2E3440 --ringcolor=88C0D0 --insidecolor=3B4252 --linecolor=4C566A
 
 
