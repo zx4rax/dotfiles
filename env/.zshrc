@@ -16,6 +16,11 @@ plugins=(
 	pass
 )
 source $ZSH/oh-my-zsh.sh
+bindkey -s ^f "tmux-sessionizer\n"
+
+bindkey -s ^p "pass-fzf\n"
+
+bindkey -s ^o "pass-fzf --otp\n"
 
 
 alias zshconfig="mate ~/.zshrc"
@@ -41,4 +46,4 @@ PROMPT='%(?:%{$fg_bold[white]%}%1{Χ%} :%{$fg_bold[white]%}%1{Χ%} )%{$fg[cyan]%
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:/opt/nvim/"
 export PATH="$PATH:$HOME/.local/zig-linux-x86_64-0.14.0"
-
+export PATH="$PATH:$HOME/.local/bin"

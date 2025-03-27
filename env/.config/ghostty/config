@@ -2,10 +2,12 @@
 
 theme = rose-pine
 background = 000000
-
-shell-integration-features = no-cursor,no-sudo,no-title
+shell-integration-features = no-cursor,no-sudo,no-title,sudo
 gtk-titlebar = false
 
 # what is a prefix?
-keybind = ctrl+d=scroll_page_fractional:0.5
+keybind = ctrl+j=scroll_page_fractional:0.5
 keybind = ctrl+u=scroll_page_fractional:-0.5
+keybind = ctrl+d=close_surface
+keybind = ctrl+shift+r=reload_config
+keybind = shift+~=paste_from_selection
