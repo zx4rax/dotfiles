@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+sudo curl -SfL0 https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -o /usr/bin/yt-dlp && sudo chmod +x /usr/bin/yt-dlp
+
+#newest
+#sudo curl -SfL0 https://github.com/yt-dlp/yt-dlp/releases/download/$(curl -1sSfL https://api.github.com/repos/yt-dlp/yt-dlp/releases | jq -r "first(.[]) | .tag_name"
+)/yt-dlp_linux -o /usr/bin/yt-dlp && chmod +x /usr/bin/yt-dlp

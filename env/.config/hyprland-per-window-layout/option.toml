@@ -1,0 +1,12 @@
+# list of keyboards to operate on
+# use `hyprctl devices -j` to list all keyboards
+keyboards = [
+  "keychron-keychron-k2-2",
+]
+
+# layout_index => window classes list
+# use `hyprctl clients` to get class names
+[[default_layouts]]
+1 = [
+    "org.telegram.desktop",
+]

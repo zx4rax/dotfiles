@@ -1,0 +1,14 @@
+#!/bin/bash
+ip link add dev {{ wireguard_interface }} type wireguard
+ip link set mtu {{ wireguard_mtu }} dev {{ wireguard_interface }}
+{% for addr in wireguard_local_addresses %}
+ip address add dev {{ wireguard_interface }} {{ addr }}
+{% endfor %}
+wg set {{ wireguard_interface }} \
+  listen-port {{ wireguard_port }} \
+  private-key {{ wireguard_private_key_path }} \
+  peer {{ wireguard_peer_public_key }} \
+  allowed-ips {{ wireguard_allowed_ips }} \
+  endpoint {{ wireguard_server }}:{{ wireguard_port }} \
+  {{ 'reserved ' + wireguard_reserved if wireguard_reserved is defined else '' }}
+ip link set up dev {{ wireguard_interface }}

@@ -2,4 +2,4 @@
 
 go install github.com/tomnomnom/gf
 
-echo 'source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.bash' >> ~/.bashrc
+echo 'source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.bash' >>~/.bashrc

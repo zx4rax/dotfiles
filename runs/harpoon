@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+version="v0.10.2"
+if [ ! -z $NVIM_VERSION ]; then
+    version="$NVIM_VERSION"
+fi
+
+echo "version: \"$version\""
+
+git clone https://github.com/ThePrimeagen/harpoon.git $HOME/personal/harpoon
+cd $HOME/personal/harpoon
+git fetch
+git checkout harpoon2

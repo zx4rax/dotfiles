@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-sudo apt update
-sudo apt install llvm lld llvm-dev liblld-dev clang libclang-dev libglib2.0-dev libgtk-4-dev libadwaita-1-dev git
-sudo snap install ghostty --classic

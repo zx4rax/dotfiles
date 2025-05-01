@@ -1,0 +1,105 @@
+---
+- name: Configure WireGuard interface
+  hosts: wireguard_servers
+  become: yes
+  vars:
+    wireguard_interface: warp
+    wireguard_port: 2408
+    wireguard_server: engage.cloudflareclient.com
+    wireguard_local_addresses:
+      - 172.16.0.2/32
+      - 2606:4700:110:85a4:e5ee:6709:28cd:e3d4/128
+    wireguard_private_key: QMZRV5p/CeaVzKrWVkH+28KJzaF4uC2TiJqNvncMF2M=
+    wireguard_peer_public_key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+    wireguard_reserved: 234,147,3
+    wireguard_mtu: 1280
+    wireguard_allowed_ips: 0.0.0.0/0,::/0
+    wireguard_private_key_path: /etc/wireguard/privatekey
+
+  tasks:
+    - name: Install WireGuard
+      ansible.builtin.package:
+        name: wireguard
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Ensure WireGuard configuration directory exists
+      ansible.builtin.file:
+        path: /etc/wireguard
+        state: directory
+        mode: "0700"
+
+    - name: Save WireGuard private key
+      ansible.builtin.copy:
+        content: "{{ wireguard_private_key }}"
+        dest: "{{ wireguard_private_key_path }}"
+        mode: "0600"
+
+    - name: Create WireGuard interface
+      ansible.builtin.command:
+        cmd: ip link add dev {{ wireguard_interface }} type wireguard
+        creates: /sys/class/net/{{ wireguard_interface }}
+      register: ip_link_add
+      changed_when: ip_link_add.rc == 0
+
+    - name: Set MTU on WireGuard interface
+      ansible.builtin.command:
+        cmd: ip link set mtu {{ wireguard_mtu }} dev {{ wireguard_interface }}
+      when: wireguard_mtu is defined
+
+    - name: Add IP addresses to WireGuard interface
+      ansible.builtin.command:
+        cmd: ip address add dev {{ wireguard_interface }} {{ item }}
+      loop: "{{ wireguard_local_addresses }}"
+      when: wireguard_local_addresses is defined
+
+    - name: Configure WireGuard peer
+      ansible.builtin.command:
+        cmd: >
+          wg set {{ wireguard_interface }}
+          listen-port {{ wireguard_port }}
+          private-key {{ wireguard_private_key_path }}
+          peer {{ wireguard_peer_public_key }}
+          allowed-ips {{ wireguard_allowed_ips }}
+          endpoint {{ wireguard_server }}:{{ wireguard_port }}
+          {{ 'reserved ' + wireguard_reserved if wireguard_reserved is defined else '' }}
+      register: wg_set
+      changed_when: wg_set.rc == 0
+
+    - name: Bring up WireGuard interface
+      ansible.builtin.command:
+        cmd: ip link set up dev {{ wireguard_interface }}
+      register: ip_link_up
+      changed_when: ip_link_up.rc == 0
+
+    - name: Ensure WireGuard persists after reboot
+      ansible.builtin.template:
+        src: wireguard_setup_warp.sh.j2
+        dest: /etc/wireguard/setup_{{ wireguard_interface }}.sh
+        mode: "0700"
+      notify: Enable WireGuard service
+
+  handlers:
+    - name: Enable WireGuard service
+      ansible.builtin.copy:
+        content: |
+          [Unit]
+          Description=Setup WireGuard interface {{ wireguard_interface }}
+          After=network.target
+
+          [Service]
+          Type=oneshot
+          ExecStart=/etc/wireguard/setup_{{ wireguard_interface }}.sh
+          RemainAfterExit=yes
+
+          [Install]
+          WantedBy=multi-user.target
+        dest: /etc/systemd/system/wireguard-{{ wireguard_interface }}.service
+        mode: "0644"
+      notify: Start WireGuard service
+
+    - name: Start WireGuard service
+      ansible.builtin.systemd:
+        name: wireguard-{{ wireguard_interface }}
+        enabled: yes
+        state: started
