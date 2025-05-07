@@ -1,4 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
+export XDG_CONFIG_HOME="$HOME/.config"
+
 ZSH_THEME="robbyrussell"
 
 plugins=(
@@ -17,11 +19,8 @@ plugins=(
 )
 source $ZSH/oh-my-zsh.sh
 bindkey -s ^f "tmux-sessionizer\n"
-
 bindkey -s ^p "pass-fzf\n"
-
 bindkey -s ^o "pass-fzf --otp\n"
-
 
 alias zshconfig="mate ~/.zshrc"
 alias ohmyzsh="mate ~/.oh-my-zshi"
@@ -41,7 +40,7 @@ alias tidal-dl="./home/xigma/tidal-dl/tidal/bin/tidal-dl"                #tidal 
 alias vim="nvim"
 alias clean="sudo apt autoremove -y && sudo apt clean && sudo find /var/log -type f -name '*.log' -delete && sudo rm -rf ~/.cache/*"
 
-PROMPT='%(?:%{$fg_bold[white]%}%1{Χ%} :%{$fg_bold[white]%}%1{Χ%} )%{$fg[cyan]%}%c%{$reset_color%} $(git branch 2>/dev/null | grep "*" | sed -e "s/* //g") '
+#PROMPT='%(?:%{$fg_bold[white]%}%1{Χ%} :%{$fg_bold[white]%}%1{Χ%} )%{$fg[cyan]%}%c%{$reset_color%} $(git branch 2>/dev/null | grep "*" | sed -e "s/* //g") '
 
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:/opt/nvim/"

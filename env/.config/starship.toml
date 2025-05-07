@@ -111,7 +111,7 @@ format = "[$duration ](bold yellow)"
 # vimcmd_visual_symbol = '[](bold fg:color_yellow)'
 
 [character]
-success_symbol = "[[♥](green) ❯](pink)"
+success_symbol = "[[Χ](green) ❯](pink)"
 error_symbol = "[[\uea87](maroon) ❯](pink)"
 vimcmd_symbol = "[[\ue7c5](sapphire) ❯](pink)"
 vimcmd_visual_symbol = "[[\ue7c5](mauve) ❯](pink)"

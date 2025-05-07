@@ -1,3 +1,8 @@
+anydesk-bin
+fprintd
+gimp
+tcpdump
+hyprshot
 qimgv
 vi
 bat
@@ -121,9 +126,11 @@ locate
 
 
 #Font
+ttf-dejavu
+ttf-vazir
+noto-fonts
 ttf-jetbrains-mono-nerd
 noto-fonts-emoji
-adobe-source-sans-pro-fonts
 awesome-terminal-fonts
 unicode-emoji
 otf-fira-code
@@ -139,9 +146,7 @@ ttf-joypixels
 ttf-liberation
 ttf-ms-fonts
 ttf-roboto
-ttf-ubuntu-font-family
-ttf-wps-fon
-
+ttf-nerd-fonts-symbols-mono
 
 polkit-gnome
 python-requests
