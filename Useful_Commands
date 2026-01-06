@@ -1,0 +1,7 @@
+subfinder -d irancell.ir -all -recursive > subirancell.ir.txt #basic subdomain discovery
+cat subirancell.ir.txt | httpx-toolkit -ports 80,443,8080,8000,8888 -threads 200 > subirancell.irs_alive.txt #live Subdomain filter
+subzy run --targets subirancell.irs.txt --concurrency 100 --hide_fails --verify_ssl #Subdomain Takeover Check
+katana -u subirancell.irs_alive.txt -d 5 -ps -pss waybackarchive,commoncrawl,alienvault -kf -jc -fx -ef woff,css,png,svg,jpg,woff2,jpeg,gif,svg -o allurls.txt #passive url collection
+echo irancell.ir | katana -d 5 -ps -pss waybackarchive,commoncrawl,alienvault -f qurl | urldedupe >output.txtkatana -u https://irancell.ir -d 5 | grep '=' | urldedupe | anew output.txtcat output.txt | sed 's/=.*/=/' >final.txt
+echo irancell.ir | gau --mc 200 | urldedupe >urls.txtcat urls.txt | grep -E ".php|.asp|.aspx|.jspx|.jsp" | grep '=' | sort > output.txtcat output.txt | sed 's/=.*/=/' >final.txt
+cat allurls.txt | grep -E "\.xls|\.xml|\.xlsx|\ .json|\.pdf|\.sql|\.doc|\.docx|\.pptx|\.txt|\.zip|\.tar\.gz|\.tgz|\.bak|\.7z|\.rar|\.log|\.cache|\.secret|\.db|\.backup|\.yml|\.gz|\.config|\.csv|\.yaml|\.md|\.md5"

@@ -36,7 +36,6 @@ alias psg="ps aux | grep"                          # Search for a process
 alias reload="source ~/.zshrc"                     # Reload zsh configuration
 alias norg="gron --ungron"
 alias ungron="gron --ungron"
-alias tidal-dl="./home/xigma/tidal-dl/tidal/bin/tidal-dl"                #tidal downloader app
 alias vim="nvim"
 alias clean="sudo apt autoremove -y && sudo apt clean && sudo find /var/log -type f -name '*.log' -delete && sudo rm -rf ~/.cache/*"
 

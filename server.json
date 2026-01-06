@@ -1,0 +1,56 @@
+{
+    "log": {
+      "level": "error",
+      "timestamp": true
+    },
+    "dns": {
+      "servers": [
+        {
+          "type": "udp",
+          "tag": "cloudflare",
+          "server": "1.1.1.1"
+        }
+      ],
+      "final": "cloudflare",
+      "strategy": "prefer_ipv4",
+      "disable_cache": false
+    },
+    "inbounds": [
+      {
+        "type": "shadowsocks",
+        "tag": "ss-in",
+        "listen": "::",
+        "listen_port": 5359,
+        "method": "chacha20-ietf-poly1305",
+        "password": "strongest-fucking-password-in-the-world",
+        "network": "tcp",
+        "multiplex": {
+          "enabled": true
+        }
+      }
+    ],
+    "outbounds": [
+      {
+        "type": "direct",
+        "tag": "direct"
+      }
+    ],
+    "route": {
+      "default_domain_resolver": {
+        "server": "cloudflare"
+      },
+      "rules": [
+        {
+          "inbound": "ss-in",
+          "outbound": "direct"
+        },
+        {
+          "protocol": "dns",
+          "action": "hijack-dns"
+        }
+      ],
+      "final": "direct",
+      "auto_detect_interface": true,
+      "override_android_vpn": true
+    }
+  }

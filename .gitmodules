@@ -1,3 +1,6 @@
 [submodule "tmux-sessionizer"]
 	path = tmux-sessionizer
 	url = git@github.com:ThePrimeagen/tmux-sessionizer.git
+[submodule "payloads"]
+	path = payloads
+	url = git@github.com:zx4rax/payloads.git

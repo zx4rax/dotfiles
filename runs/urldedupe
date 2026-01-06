@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+git clone https://github.com/ameenmaali/urldedupe.git
+cd urldedupe
+cmake CMakeLists.txt
+make
